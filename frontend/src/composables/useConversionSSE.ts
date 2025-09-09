@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { useToast } from 'primevue'
+import { useToast } from 'primevue/usetoast'
 
 export function useConversionSSE() {
     const toast = useToast();
