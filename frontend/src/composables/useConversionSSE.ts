@@ -32,15 +32,30 @@ export function useConversionSSE() {
 
             evtSource.onmessage = (event) => {
                 const data = JSON.parse(event.data)
-                result.value = data.result
-                evtSource.close()
+                console.log('SSE message received:', data);
+                if (data.error) {
+                    error.value = data.error
+                    showError();
+                    evtSource.close()
+                } else {
+                    result.value = data.result
+                    evtSource.close()
+                }
                 loading.value = false
             }
 
-            evtSource.onerror = (err) => {
-                error.value = 'SSE connection error'
+            evtSource.onerror = (err: any) => {
+                console.log('EventSource failed:', err);
+                if (err?.message) {
+                    error.value = err.message;
+                } else if (err?.target?.readyState === EventSource.CLOSED) {
+                    error.value = 'SSE connection closed unexpectedly';
+                } else {
+                    error.value = 'SSE connection error';
+                }
                 evtSource.close()
                 loading.value = false
+                showError();
             }
         } catch (err: any) {
             console.log(err);

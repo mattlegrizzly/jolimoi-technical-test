@@ -1,11 +1,11 @@
 /**
  * Converts an integer to its Roman numeral representation.
- * @param {number} num - The number to convert (1-3999).
+ * @param {number} num - The number to convert (1-100).
  * @returns {string} Roman numeral string.
  */
 async function toRoman(num) {
-    if (typeof num !== 'number' || num < 1 || num > 3999) {
-        throw new Error('Input must be a number between 1 and 3999');
+    if (typeof num !== 'number' || num < 1 || num > 100) {
+        throw new Error('Input must be a number between 1 and 100');
     }
 
     const romanNumerals = [

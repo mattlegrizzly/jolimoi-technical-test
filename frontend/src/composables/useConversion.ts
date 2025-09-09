@@ -32,7 +32,16 @@ export function useConversion() {
                 },
                 body: JSON.stringify({ number: value.value }),
             })
-            if (!response.ok) throw new Error('Conversion failed')
+            if (!response.ok) {
+                const error = await response.json();
+                console.log(error);
+                let errorMsg = 'Conversion failed';
+                if (error && error.error) {
+                    errorMsg = error.error;
+                }
+                error.value = errorMsg;
+                throw new Error(errorMsg);
+            }
             const data = await response.json()
             result.value = data.result
         } catch (err: any) {

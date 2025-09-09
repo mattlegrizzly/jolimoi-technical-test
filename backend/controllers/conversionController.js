@@ -6,8 +6,8 @@ const { toRoman } = require('../services/romanService');
 exports.convertNumber = async (req, res) => {
   const { number } = req.body;
 
-  if (isNaN(number) || number < 1 || number > 3999 || !Number.isInteger(number)) {
-    return res.status(400).json({ error: "Number must be a positive integer between 1 and 3999" });
+  if (isNaN(number) || number < 1 || number > 100 || !Number.isInteger(number)) {
+    return res.status(400).json({ error: "Number must be a positive integer between 1 and 100" });
   }
 
   const result = await toRoman(number);
@@ -20,10 +20,11 @@ exports.convertNumber = async (req, res) => {
 exports.convertNumberSSE = async (req, res) => {
   const number = parseInt(req.query.number, 10);
 
-  if (isNaN(number) || number < 1 || number > 3999) {
-    res.writeHead(400, { 'Content-Type': 'text/plain' });
-    return res.end("Number must be between 1 and 3999");
-  }
+if (isNaN(number) || number < 1 || number > 100) {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.write(`data: ${JSON.stringify({ error: "Number must be between 1 and 100" })}\n\n`);
+  return res.end();
+}
 
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
