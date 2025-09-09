@@ -6,6 +6,8 @@ import PrimeVue from 'primevue/config';
 
 import Aura from '@primeuix/themes/aura';
 
+import ToastService from 'primevue/toastservice';
+
 import './assets/index.css'
 
 const app = createApp(App)
@@ -22,5 +24,6 @@ app.use(PrimeVue, {
         }
     }
 });
+app.use(ToastService);
 
 app.mount('#app')

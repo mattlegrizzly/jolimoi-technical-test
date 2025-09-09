@@ -1,21 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import InputValueForm from './InputValueForm.vue'
 import Button from 'primevue/button'
 import { useConversion } from '@/composables/useConversion'
+import { useConversionSSE } from '@/composables/useConversionSSE'
+import ToggleSwitch from 'primevue/toggleswitch'
+import { Toast } from 'primevue'
 
-const { value, result, loading, error, convert } = useConversion()
+const ajaxConversion = useConversion()
+const sseConversion = useConversionSSE()
+
+const activeConversion = computed(() => (useSSE.value ? sseConversion : ajaxConversion))
+
+const inputValue = computed(() => activeConversion.value.value)
+
+const convert = () => {
+  activeConversion.value.convert()
+}
+
+const useSSE = ref(false)
 </script>
 
 <template>
+  <Toast />
   <div class="convert-form">
-    <h2>Convert Numerals</h2>
-    <InputValueForm :value="value" @update:value="(val) => (value = val)" />
+    <div
+      class="header"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      "
+    >
+      <h2>Convert Numerals {{ useSSE ? ' (SSE)' : '' }}</h2>
+      <ToggleSwitch v-model="useSSE" @update:model-value="(val) => (useSSE = val)" />
+    </div>
+    <InputValueForm :value="inputValue.value" @update:value="(val) => (inputValue.value = val)" />
     <form>
-      <Button label="Convert" :loading="loading" @click="convert" />
+      <Button label="Convert" :loading="activeConversion.loading.value" @click="convert" />
     </form>
-    <div v-if="result !== null" class="result">
-      <h3>Result: {{ result }}</h3>
+    <div v-if="activeConversion.result.value" class="result">
+      <h3>Result: {{ activeConversion.result.value }}</h3>
     </div>
   </div>
 </template>

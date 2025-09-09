@@ -31,6 +31,8 @@ async function toRoman(num) {
             num -= value;
         }
     }
+
+    // Simulate async operation
     await new Promise(resolve => setTimeout(resolve, Math.floor(Math.random() * 201) + 100));
     return result;
 }
