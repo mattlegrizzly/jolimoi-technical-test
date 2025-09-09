@@ -1,0 +1,7 @@
+@import './color.css';
+
+body {
+  font-family: 'Cinzel', serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
