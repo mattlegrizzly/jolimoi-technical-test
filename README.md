@@ -9,7 +9,7 @@ The project demonstrates two approaches:
 
 ---
 
-## 🚀 Features
+## Features
 - Convert any integer between **0 and 100** into Roman numerals.  
 - Step 1: Front-end form with a request to the backend (AJAX).  
 - Step 2: Same functionality but using **Server-Sent Events (SSE)**.  
@@ -17,14 +17,15 @@ The project demonstrates two approaches:
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 - **Backend**: Node.js + Express  
 - **Frontend**: Vue.js + PRIME Vue  
 - **Communication**: AJAX / SSE  
 
 ---
 
-## 📂 Project Structure
+## Project Structure
+```sql
 jolimoi-technical-test/
 │── backend/
 │ ├── roman.js # Roman numeral conversion function
@@ -39,9 +40,10 @@ jolimoi-technical-test/
 │ └── vite.config.js # or webpack config
 │
 │── README.md
+```
 ---
 
-## 🔀 Git Branches
+## Git Branches
 - `main` → Base project setup.  
 - `step1` → Conversion with AJAX request.  
 - `step2` → Conversion with Server-Sent Events (SSE).  
