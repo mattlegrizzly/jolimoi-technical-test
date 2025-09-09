@@ -51,3 +51,51 @@ jolimoi-technical-test/
 Each step is implemented in a separate branch for clarity.  
 
 ---
+
+## Setup Instructions
+
+1. **Clone the repository**:  
+   ```bash
+   git clone <repository-url>
+   git checkout step1 # or step2 for SSE version
+   ```
+
+2. **Backend Setup**:  
+
+    - Navigate to the `backend` directory, install dependencies
+    - Create .env 
+    - Start the server
+
+    ```bash
+    (.env)
+
+    NODE_PORT=3000
+    ``` 
+
+   ```bash
+    cd backend
+    npm install
+    npm run dev
+   ```
+
+    The backend server will run on `http://localhost:3000`.
+
+3. **Frontend Setup**:
+
+    - Navigate to the `frontend` directory, install dependencies
+    - Create .env
+    - Start the development server
+
+    ```bash
+    (.env)
+
+    VITE_API_URL=http://localhost:3000
+    ```
+    
+   ```bash
+    cd ../frontend
+    npm install
+    npm run dev
+   ```
+
+    The frontend will be available at `http://localhost:5173` 
