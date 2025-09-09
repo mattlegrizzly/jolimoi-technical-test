@@ -34,7 +34,10 @@ const useSSE = ref(false)
       "
     >
       <h2>Convert Numerals {{ useSSE ? ' (SSE)' : '' }}</h2>
-      <ToggleSwitch v-model="useSSE" @update:model-value="(val) => (useSSE = val)" />
+      <div style="display: flex; align-items: center; flex-direction: column">
+        <span style="margin-right: 0.5rem">Use SSE</span>
+        <ToggleSwitch v-model="useSSE" @update:model-value="(val) => (useSSE = val)" />
+      </div>
     </div>
     <InputValueForm :value="inputValue.value" @update:value="(val) => (inputValue.value = val)" />
     <form>
@@ -48,7 +51,7 @@ const useSSE = ref(false)
 
 <style scoped>
 .convert-form {
-  max-width: 400px;
+  max-width: 500px;
   margin: 2rem auto;
   padding: 1rem;
   border: 1px solid var(--stroke-color);
