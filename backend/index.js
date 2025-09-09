@@ -20,6 +20,8 @@ app.use('/conversion', conversionRoutes);
 
 const port = process.env.NODE_PORT || 3000;
 
-app.listen(port, () => {
-    console.log(`Node.js HTTP server is running on port ${port}`);
-});
+module.exports = app;
+
+if (require.main === module) {
+  app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
+}
